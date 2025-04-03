@@ -3,23 +3,166 @@
 <head>
     <%- include('./partials/head') %>
     <title>Signin</title>
+    <style>
+        /* Premium dark styling for signin page */
+        body {
+            background-color: #f2f2f2;
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+        }
+        
+        .signin-container {
+            max-width: 500px;
+            margin: 3rem auto;
+            padding: 2.5rem;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .signin-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .signin-header h1 {
+            color: #2d3748;
+            font-weight: 700;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .signin-header p {
+            color: #718096;
+            font-size: 1rem;
+        }
+        
+        .form-label {
+            font-weight: 500;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+        
+        .form-control {
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: #2d3748;
+            box-shadow: 0 0 0 3px rgba(45, 55, 72, 0.2);
+        }
+        
+        .form-text {
+            color: #718096;
+            font-size: 0.85rem;
+        }
+        
+        .btn-signin {
+            background: #2d3748;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            color: white;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 1rem;
+        }
+        
+        .btn-signin:hover {
+            background: #1a202c;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(26, 32, 44, 0.4);
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 1.5rem 0;
+            color: #718096;
+        }
+        
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .divider::before {
+            margin-right: 1rem;
+        }
+        
+        .divider::after {
+            margin-left: 1rem;
+        }
+        
+        .signup-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.95rem;
+            color: #718096;
+        }
+        
+        .signup-link a {
+            color: #2d3748;
+            font-weight: 500;
+            text-decoration: none;
+        }
+        
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .form-floating {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+    </style>
 </head>
 <body>
     <%- include('./partials/nav') %>
 
     <div class="container">
-        <form action="/user/signin" method="post">
-            <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Email address</label>
-              <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-              <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        <div class="signin-container">
+            <div class="signin-header">
+                <h1>Welcome Back</h1>
+                <p>Sign in to access your account</p>
             </div>
-            <div class="mb-3">
-              <label for="exampleInputPassword1" class="form-label">Password</label>
-              <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+            
+            <form action="/user/signin" method="post">
+                <div class="mb-4">
+                    <label for="exampleInputEmail1" class="form-label">Email address</label>
+                    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="your@email.com">
+                    <div id="emailHelp" class="form-text mt-1">We'll never share your email with anyone else.</div>
+                </div>
+                
+                <div class="mb-4">
+                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="••••••••">
+                </div>
+                
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="rememberMe">
+                        <label class="form-check-label" for="rememberMe">Remember me</label>
+                    </div>
+                    <a href="#" class="text-decoration-none" style="color: #2d3748; font-size: 0.9rem;">Forgot password?</a>
+                </div>
+                
+                <button type="submit" class="btn btn-signin">Sign In</button>
+            </form>
+            
+            <div class="divider">or</div>
+            
+            <div class="signup-link">
+                Don't have an account? <a href="/user/signup">Sign up</a>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </form>
+        </div>
     </div>
 
     <%- include('./partials/script') %>

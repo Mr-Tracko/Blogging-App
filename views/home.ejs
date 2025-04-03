@@ -3,26 +3,214 @@
 <head>
     <%- include('./partials/head') %>
     <title>Homepage</title>
+    <style>
+        /* Premium dark styling */
+        body {
+            background-color: #f2f2f2;
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+            color: white;
+            padding: 3rem 0;
+            margin-bottom: 3rem;
+            border-radius: 0 0 25px 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            text-align: center;
+        }
+        
+        .hero-content h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .hero-content p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .blog-grid {
+            padding: 0 1rem;
+        }
+        
+        .blog-card {
+            border: none;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            height: 100%;
+            background-color: white;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-img-container {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .blog-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transition: transform 0.5s ease;
+        }
+        
+        .blog-card:hover img {
+            transform: scale(1.05);
+        }
+        
+        .blog-card .card-body {
+            padding: 1.5rem;
+        }
+        
+        .blog-card .card-title {
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+            color: #2d3748;
+        }
+        
+        .blog-date {
+            color: #718096;
+            font-size: 0.85rem;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+        
+        .card-excerpt {
+            color: #4a5568;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .btn-view {
+            background: #2d3748;
+            border: none;
+            padding: 0.5rem 1.25rem;
+            border-radius: 50px;
+            color: white;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-view:hover {
+            background: #1a202c;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(26, 32, 44, 0.4);
+        }
+        
+        .section-title {
+            position: relative;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            padding-bottom: 0.75rem;
+            text-align: center;
+            color: #2d3748;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: #2d3748;
+        }
+        
+        .blog-empty {
+            text-align: center;
+            padding: 3rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        @media (max-width: 992px) {
+            .row-cols-lg-3 {
+                --bs-row-cols: 2 !important;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .row-cols-md-2 {
+                --bs-row-cols: 1 !important;
+            }
+            
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <%- include('./partials/nav') %>
 
-    <div class="container mt-3">
-        <div class="row row-cols-3">
-            <% blogs.forEach(blog  => { %>
-                <div class="col">
-                    <div class="card col" style="width: 18rem;">
-                        <img src="<%= blog.coverImageURL || '/default-placeholder.jpg' %>" class="card-img-top">
-                        <div class="card-body">
-                          <h5 class="card-title"><%= blog.title %></h5>
-                          <a href="/blog/<%= blog._id %>" class="btn btn-primary">View</a>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>Welcome to our Blog</h1>
+            <p>Discover thoughtful articles, inspiring stories, and expert insights</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <h2 class="section-title">Latest Articles</h2>
+        
+        <div class="blog-grid">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                <% if (blogs && blogs.length > 0) { %>
+                    <% blogs.forEach(blog => { %>
+                        <div class="col">
+                            <div class="blog-card card">
+                                <div class="card-img-container">
+                                    <img src="<%= blog.coverImageURL || '/default-placeholder.jpg' %>" class="card-img-top" alt="<%= blog.title %>">
+                                </div>
+                                <div class="card-body">
+                                    <% if (blog.createdAt) { %>
+                                        <small class="blog-date"><%= new Date(blog.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %></small>
+                                    <% } %>
+                                    <h5 class="card-title"><%= blog.title %></h5>
+                                    <% if (blog.excerpt) { %>
+                                        <p class="card-excerpt"><%= blog.excerpt.substring(0, 100) %>...</p>
+                                    <% } %>
+                                    <a href="/blog/<%= blog._id %>" class="btn btn-view">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                    <% }) %>
+                <% } else { %>
+                    <div class="col-12">
+                        <div class="blog-empty">
+                            <h3>No blog posts yet</h3>
+                            <p>Check back soon for new content!</p>
                         </div>
                     </div>
-                </div>
-            <% }) %>
+                <% } %>
+            </div>
         </div>
     </div>
-    
 
     <%- include('./partials/script') %>
 </body>

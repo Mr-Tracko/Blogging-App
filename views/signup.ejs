@@ -2,28 +2,200 @@
 <html lang="en">
 <head>
     <%- include('./partials/head') %>
-    <title>signUp</title>
+    <title>Sign Up</title>
+    <style>
+        /* Premium dark styling for signup page */
+        body {
+            background-color: #f2f2f2;
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+        }
+        
+        .signup-container {
+            max-width: 500px;
+            margin: 3rem auto;
+            padding: 2.5rem;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .signup-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .signup-header h1 {
+            color: #2d3748;
+            font-weight: 700;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .signup-header p {
+            color: #718096;
+            font-size: 1rem;
+        }
+        
+        .form-label {
+            font-weight: 500;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+        
+        .form-control {
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: #2d3748;
+            box-shadow: 0 0 0 3px rgba(45, 55, 72, 0.2);
+        }
+        
+        .form-text {
+            color: #718096;
+            font-size: 0.85rem;
+        }
+        
+        .btn-signup {
+            background: #2d3748;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            color: white;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 1rem;
+        }
+        
+        .btn-signup:hover {
+            background: #1a202c;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(26, 32, 44, 0.4);
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 1.5rem 0;
+            color: #718096;
+        }
+        
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .divider::before {
+            margin-right: 1rem;
+        }
+        
+        .divider::after {
+            margin-left: 1rem;
+        }
+        
+        .signin-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.95rem;
+            color: #718096;
+        }
+        
+        .signin-link a {
+            color: #2d3748;
+            font-weight: 500;
+            text-decoration: none;
+        }
+        
+        .signin-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .password-requirements {
+            margin-top: 0.5rem;
+            padding: 0.75rem;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: #718096;
+        }
+        
+        .password-requirements ul {
+            padding-left: 1.2rem;
+            margin-bottom: 0;
+        }
+        
+        .password-requirements ul li {
+            margin-bottom: 0.25rem;
+        }
+        
+        .terms-checkbox {
+            margin-top: 1.5rem;
+        }
+    </style>
 </head>
 <body>
     <%- include('./partials/nav') %>
 
     <div class="container">
-        <form action="/user/signup" method="post">
-            <div class="mb-3">
-              <label for="fullName" class="form-label">Full Name</label>
-              <input type="text" name="fullName" class="form-control" id="fullName" aria-describedby="fullName">
+        <div class="signup-container">
+            <div class="signup-header">
+                <h1>Create Account</h1>
+                <p>Join our community today</p>
             </div>
-            <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Email address</label>
-              <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-              <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            
+            <form action="/user/signup" method="post">
+                <div class="mb-4">
+                    <label for="fullName" class="form-label">Full Name</label>
+                    <input type="text" name="fullName" class="form-control" id="fullName" placeholder="John Doe" required>
+                </div>
+                
+                <div class="mb-4">
+                    <label for="exampleInputEmail1" class="form-label">Email Address</label>
+                    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="your@email.com" required>
+                    <div id="emailHelp" class="form-text mt-1">We'll never share your email with anyone else.</div>
+                </div>
+                
+                <div class="mb-4">
+                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="••••••••" required>
+                    
+                    <div class="password-requirements">
+                        <p class="mb-1">Password must include:</p>
+                        <ul>
+                            <li>At least 8 characters</li>
+                            <li>At least one uppercase letter</li>
+                            <li>At least one number</li>
+                            <li>At least one special character</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="terms-checkbox mb-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="termsCheck" required>
+                        <label class="form-check-label" for="termsCheck">
+                            I agree to the <a href="#" style="color: #2d3748;">Terms of Service</a> and <a href="#" style="color: #2d3748;">Privacy Policy</a>
+                        </label>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-signup">Create Account</button>
+            </form>
+            
+            <div class="divider">or</div>
+            
+            <div class="signin-link">
+                Already have an account? <a href="/user/signin">Sign in</a>
             </div>
-            <div class="mb-3">
-              <label for="exampleInputPassword1" class="form-label">Password</label>
-              <input type="password" name="password" class="form-control" id="exampleInputPassword1">
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </form>
+        </div>
     </div>
 
     <%- include('./partials/script') %>

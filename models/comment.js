@@ -22,5 +22,12 @@ const commentSchema = new Schema(
   { timestamps: true }
 );
 
+//ref is useed for:
+// To link related data across collections
+
+// To enable .populate() for rich document queries
+
+// To keep your schema normalized and clean
+
 const Comment = model("Comment", commentSchema);
 module.exports = Comment;

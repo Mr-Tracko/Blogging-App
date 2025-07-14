@@ -10,6 +10,12 @@ router.get("/signup", (req, res) => {
     return res.render("signup");
 });
 
+router.get("/home", (req, res) => {
+    return res.render("home", { blogs });
+});
+
+
+
 router.post("/signin" , async(req, res) => {
     const { email , password} = req.body;
     //and signin k liye hum email and password check krege hmaare database m

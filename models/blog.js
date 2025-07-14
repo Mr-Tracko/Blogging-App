@@ -21,5 +21,7 @@ const blogSchema = new Schema({
     }
 }, { timestamps : true });
 
+//timestamps : true adds two extra filed to our object schema and those two fields are : CreatedAt , UpdatedAt
+
 const blog = model("blog" , blogSchema);
 module.exports = blog;

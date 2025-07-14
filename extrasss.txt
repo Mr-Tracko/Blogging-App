@@ -6,10 +6,9 @@ the different different files .. we can directly take the reference from that pa
 //partial is a special feature of ejs components.
 
 here , we installed nodemon by -
-npm i nodemon -D   -> -D because it will come in a seperate filder i.e. devdependencies .. that helps to decrease the size of module .
+npm i nodemon -D   -> -D because it will come in a seperate folder i.e. devdependencies .. that helps to decrease the size of module .
 kyuki deployment k time p hmaari dev depencies install nhi hogi , jiski vjah se hmaare project ka size km rhega
 
 here , we created two scripts in package,json - 
 dev is used when we are making
 and start is used at the time when we will be doing the production , bcz there we don't have to restart our server again and again
-

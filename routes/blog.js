@@ -25,6 +25,18 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
+// Add a home route to render the homepage
+router.get("/", async (req, res) => {
+  try {
+    // You might want to fetch recent blogs or other data for the homepage
+    const blogs = await Blog.find({}).populate("createdBy");
+    return res.render("homepage", { user: req.user, blogs });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).send("Internal Server Error");
+  }
+});
+
 router.get("/add-new", (req, res) => {
   return res.render("addblog", { user: req.user });
 });
